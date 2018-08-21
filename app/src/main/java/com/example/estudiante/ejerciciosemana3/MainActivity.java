@@ -1,5 +1,6 @@
 package com.example.estudiante.ejerciciosemana3;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_imc;
     Button btn_calcular;
     TextView tv_resultado;
+    String nombreUsuario;
+    EditText edtUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         tv_imc = findViewById(R.id.tv_imc);
         btn_calcular = findViewById(R.id.btn_calcular);
         tv_resultado = findViewById(R.id.tv_resultado);
+        nombreUsuario = "NA";
+        edtUserName = findViewById(R.id.edt_user_name);
 
         //control+espacio
         btn_calcular.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 tv_resultado.setText("Hola " + newA);
 
                 Toast.makeText(MainActivity.this, "Hola "+ newA, Toast.LENGTH_SHORT).show();
+
+                Intent intento = new Intent( getApplicationContext(), Menu.class );
+                nombreUsuario = edtUserName.getText().toString();
+                intento.putExtra( "usuario", nombreUsuario);
+                startActivity( intento );
             }
         });
     }
